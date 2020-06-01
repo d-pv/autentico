@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>DJ Kaiser - Auténtico Sabor a Funk</title>
+		<!-- Include Resource Stylesheets -->
+		<link rel="stylesheet" type="text/css" href="css/foundation.min.css"/>
+		<!--Include Resource Javascript	NOTE: These are for handling things outside of the scope of AmplitudeJS		-->
+		<script type="text/javascript" src="js/jquery.js"></script>
+		<script type="text/javascript" src="js/foundation.min.js"></script>
+		<!-- Include Amplitude JS -->
+		<script type="text/javascript" src="js/amplitude.min.js"></script>
+		<!--Include UX functions JS	NOTE: These are for handling things outside of the scope of AmplitudeJS	-->
+		<script type="text/javascript" src="js/functions.js"></script>
+		<!-- Include Style Sheet -->
+		<link rel="stylesheet" type="text/css" href="css/app.css"/>
+	</head>
+	<body>
+		<div class="grid-x" id="blue-playlist-container">
+			<div class="large-10 medium-12 small-11 large-centered medium-centered small-centered cell" id="amplitude-player">
+				<div class="grid-x">
+				  <div class="large-4 medium-12 small-12 cell" id="amplitude-left">
+				    <img amplitude-song-info="cover_art_url" amplitude-main-song-info="true"/>
+				    <div id="player-left-bottom">
+				      <div id="time-container">
+				        <span class="current-time">
+				          <span class="amplitude-current-minutes" amplitude-main-current-minutes="true"></span>:<span class="amplitude-current-seconds" amplitude-main-current-seconds="true"></span>
+				        </span>
+				        <div id="progress-container">
+				          <input type="range" class="amplitude-song-slider" amplitude-main-song-slider="true"/>
+				          <progress id="song-played-progress" class="amplitude-song-played-progress" amplitude-main-song-played-progress="true"></progress>
+				          <progress id="song-buffered-progress" class="amplitude-buffered-progress" value="0"></progress>
+				        </div>
+				        <span class="duration">
+				          <span class="amplitude-duration-minutes" amplitude-main-duration-minutes="true"></span>:<span class="amplitude-duration-seconds" amplitude-main-duration-seconds="true"></span>
+				        </span>
+				      </div>
+
+				      <div id="control-container">
+				        <div id="repeat-container">
+				          <div class="amplitude-repeat" id="repeat"></div>
+				          <div class="amplitude-shuffle amplitude-shuffle-off" id="shuffle"></div>
+				        </div>
+
+				        <div id="central-control-container">
+				          <div id="central-controls">
+				            <div class="amplitude-prev" id="previous"></div>
+				            <div class="amplitude-play-pause" amplitude-main-play-pause="true" id="play-pause"></div>
+				            <div class="amplitude-next" id="next"></div>
+				          </div>
+				        </div>
+
+				        <div id="volume-container">
+				          <div class="volume-controls">
+				            <div class="amplitude-mute amplitude-not-muted"></div>
+				            <input type="range" class="amplitude-volume-slider"/>
+				            <div class="ms-range-fix"></div>
+				          </div>
+				          <div class="amplitude-shuffle amplitude-shuffle-off" id="shuffle-right"></div>
+				        </div>
+				      </div>
+
+
+
+				      <div id="meta-container">
+				        <span amplitude-song-info="name" amplitude-main-song-info="true" class="song-name"></span>
+
+				        <div class="song-artist-album">
+				          <span amplitude-song-info="artist" amplitude-main-song-info="true"></span>
+				          <span amplitude-song-info="album" amplitude-main-song-info="true"></span>
+				        </div>
+				      </div>
+				    </div>
+				  </div>
+				  <div class="large-8 medium-12 small-12 cell" id="amplitude-right">
+				    
+				  </div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var array_canciones = [
+				{
+					"name": "DJ Kaiser - Snippet Auténtico Sabor a Funk",
+					"artist": "DJ Kaiser",
+					"album": "Auténtico sabor a Funk",
+					"url": "musica/00.mp3",
+					"cover_art_url": "cover/cover-min.jpg",
+					"duration": "03:24"
+				},
+				{
+					"name": "Alan Tew vs Toteking y Xhelazz - The detectives (slow) vs Algo más que recuerdos",
+					"artist": "DJ Kaiser",
+					"album": "Auténtico sabor a Funk",
+					"url": "musica/01.mp3",
+					"cover_art_url": "cover/cover-min.jpg",
+					"duration": "02:28"
+				},
+				{
+					"name": "Alan Tew & Bullet vs Violadores del verso - The Spic vs Intro Vicios y Virtudes",
+					"artist": "DJ Kaiser",
+					"album": "Auténtico sabor a Funk",
+					"url": "musica/02.mp3",
+					"cover_art_url": "cover/cover-min.jpg",
+					"duration": "01:06"
+				},
+				{
+					"name": "Average white band vs Kase.O - Reach Out vs Intro '97",
+					"artist": "DJ Kaiser",
+					"album": "Auténtico sabor a Funk",
+					"url": "musica/03.mp3",
+					"cover_art_url": "cover/cover-min.jpg",
+					"duration": "06:38"
+				},
+				{
+					"name": "Bolywood brass band vs SFDK - Ishq Bina vs Pruébalo",
+					"artist": "DJ Kaiser",
+					"album": "Auténtico sabor a Funk",
+					"url": "musica/04.mp3",
+					"cover_art_url": "cover/cover-min.jpg",
+					"duration": "01:36"
+				},
+				{
+					"name": "Buddy Rich vs Violadores del verso - Prologue Jet Song vs Doble V",
+					"artist": "DJ Kaiser",
+					"album": "Auténtico sabor a Funk",
+					"url": "musica/05.mp3",
+					"cover_art_url": "cover/cover-min.jpg",
+					"duration": "03:41"
+				},
+				{
+					"name": "Cirque du Soleil vs Shotta - Steel Dreams vs El cazador de sueños",
+					"artist": "DJ Kaiser",
+					"album": "Auténtico sabor a Funk",
+					"url": "musica/06.mp3",
+					"cover_art_url": "cover/cover-min.jpg",
+					"duration": "03:38"
+				},
+				{
+					"name": "Cloaka Company vs Millie Jackson vs SFDK - Intro Oldaueinau vs All the way lover vs Esclavos",
+					"artist": "DJ Kaiser",
+					"album": "Auténtico sabor a Funk",
+					"url": "musica/07.mp3",
+					"cover_art_url": "cover/cover-min.jpg",
+					"duration": "03:43"
+				},
+				{
+					"name": "Craig Mack vs Mala Juntera - Flava in Ya Ear vs Flava",
+					"artist": "DJ Kaiser",
+					"album": "Auténtico sabor a Funk",
+					"url": "musica/08.mp3",
+					"cover_art_url": "cover/cover-min.jpg",
+					"duration": "04:43"
+				},
+				{
+					"name": "David McCallum vs Juaninacka - The edge vs Cuento de hadas contemporáneo",
+					"artist": "DJ Kaiser",
+					"album": "Auténtico sabor a Funk",
+					"url": "musica/09.mp3",
+					"cover_art_url": "cover/cover-min.jpg",
+					"duration": "04:14"
+				},
+				{
+					"name": "Dogma Crew vs Bob James vs Sr. Rojo - Intro Block Massacre vs Nautilus vs Nautilus 2005",
+					"artist": "DJ Kaiser",
+					"album": "Auténtico sabor a Funk",
+					"url": "musica/10.mp3",
+					"cover_art_url": "cover/cover-min.jpg",
+					"duration": "03:25"
+				},
+				{
+					"name": "Donald Byrd vs Violadores del verso y Jeru the Damaja - House of the rising sun vs Sólo quedar consuelo",
+					"artist": "DJ Kaiser",
+					"album": "Auténtico sabor a Funk",
+					"url": "musica/11.mp3",
+					"cover_art_url": "cover/cover-min.jpg",
+					"duration": "01:57"
+				},
+				{
+					"name": "Frank-T vs Aaron Neville vs Tres Monos y Karty er nene - Skynet Cienciafikción real vs Tell it like it is vs Es serio",
+					"artist": "DJ Kaiser",
+					"album": "Auténtico sabor a Funk",
+					"url": "musica/12.mp3",
+					"cover_art_url": "cover/cover-min.jpg",
+					"duration": "03:51"
+				},
+				{
+					"name": "Hamilton Bohannon vs Juaninacka - Singing a song for my mother vs Poesía del hombre pobre",
+					"artist": "DJ Kaiser",
+					"album": "Auténtico sabor a Funk",
+					"url": "musica/13.mp3",
+					"cover_art_url": "cover/cover-min.jpg",
+					"duration": "03:34"
+				},
+				{
+					"name": "Isaac Hayes vs CPV - I want to make love you so bad vs A muerte",
+					"artist": "DJ Kaiser",
+					"album": "Auténtico sabor a Funk",
+					"url": "musica/14.mp3",
+					"cover_art_url": "cover/cover-min.jpg",
+					"duration": "02:06"
+				},
+				{
+					"name": "Isaac Hayes vs Violadores del verso - The look of love vs La ciudad nunca duerme",
+					"artist": "DJ Kaiser",
+					"album": "Auténtico sabor a Funk",
+					"url": "musica/15.mp3",
+					"cover_art_url": "cover/cover-min.jpg",
+					"duration": "02:25"
+				},
+				{
+					"name": "Iva Zanicchi vs SFDK y la Gota que Colma - La orilla blanca vs Pánico",
+					"artist": "DJ Kaiser",
+					"album": "Auténtico sabor a Funk",
+					"url": "musica/16.mp3",
+					"cover_art_url": "cover/cover-min.jpg",
+					"duration": "01:55"
+				},
+				{
+					"name": "Jascha Heifetz vs Nach y Lírico - Introduction and Rondo Capriccioso in a Minor, Op. 28 vs Ser o no ser",
+					"artist": "DJ Kaiser",
+					"album": "Auténtico sabor a Funk",
+					"url": "musica/17.mp3",
+					"cover_art_url": "cover/cover-min.jpg",
+					"duration": "03:18"
+				},
+				{
+					"name": "Johnny Mathis vs SFDK - Love is blue (L'amour est bleu) vs Yo contra todos",
+					"artist": "DJ Kaiser",
+					"album": "Auténtico sabor a Funk",
+					"url": "musica/18.mp3",
+					"cover_art_url": "cover/cover-min.jpg",
+					"duration": "02:38"
+				},
+				{
+					"name": "KC & The Sunshine band vs SFDK - You don't know vs Dónde está Wifly",
+					"artist": "DJ Kaiser",
+					"album": "Auténtico sabor a Funk",
+					"url": "musica/19.mp3",
+					"cover_art_url": "cover/cover-min.jpg",
+					"duration": "03:09"
+				},
+				{
+					"name": "Led Zeppelin vs Rap'sus Klei & Hazhe - Stairway to heaven vs Medialuna",
+					"artist": "DJ Kaiser",
+					"album": "Auténtico sabor a Funk",
+					"url": "musica/20.mp3",
+					"cover_art_url": "cover/cover-min.jpg",
+					"duration": "02:56"
+				},
+				{
+					"name": "Lenny Williams vs Nach - Let's talk it over vs Mi propio cielo",
+					"artist": "DJ Kaiser",
+					"album": "Auténtico sabor a Funk",
+					"url": "musica/21.mp3",
+					"cover_art_url": "cover/cover-min.jpg",
+					"duration": "03:38"
+				},
+				{
+					"name": "Los fabulosos Cadillacs vs El Meswy - Matador",
+					"artist": "DJ Kaiser",
+					"album": "Auténtico sabor a Funk",
+					"url": "musica/22.mp3",
+					"cover_art_url": "cover/cover-min.jpg",
+					"duration": "01:32"
+				},
+				{
+					"name": "Lírico vs Héctor Lavoe vs Acción Sánchez, La Excepción y Little Pepe - Con calma vs Juanito Alimaña vs La calle está candela",
+					"artist": "DJ Kaiser",
+					"album": "Auténtico sabor a Funk",
+					"url": "musica/23.mp3",
+					"cover_art_url": "cover/cover-min.jpg",
+					"duration": "02:25"
+				},
+				{
+					"name": "Marlena Shaw vs Kase.O - Woman of the ghetto vs Ballantains",
+					"artist": "DJ Kaiser",
+					"album": "Auténtico sabor a Funk",
+					"url": "musica/24.mp3",
+					"cover_art_url": "cover/cover-min.jpg",
+					"duration": "03:32"
+				},
+				{
+					"name": "Meiko Kaji vs Nach - Shura No Hana vs El día en que murió el arte",
+					"artist": "DJ Kaiser",
+					"album": "Auténtico sabor a Funk",
+					"url": "musica/25.mp3",
+					"cover_art_url": "cover/cover-min.jpg",
+					"duration": "04:09"
+				},
+				{
+					"name": "Monk Higgins vs Juaninacka y SFDK - Railroad vs Soy Caminante",
+					"artist": "DJ Kaiser",
+					"album": "Auténtico sabor a Funk",
+					"url": "musica/26.mp3",
+					"cover_art_url": "cover/cover-min.jpg",
+					"duration": "02:36"
+				},
+				{
+					"name": "Raphael vs H-Mafia y SFDK - Balada triste de trompeta vs Moraleja",
+					"artist": "DJ Kaiser",
+					"album": "Auténtico sabor a Funk",
+					"url": "musica/27.mp3",
+					"cover_art_url": "cover/cover-min.jpg",
+					"duration": "03:25"
+				},
+				{
+					"name": "Rocky M vs Violadores del verso - Burning heart vs Zombies",
+					"artist": "DJ Kaiser",
+					"album": "Auténtico sabor a Funk",
+					"url": "musica/28.mp3",
+					"cover_art_url": "cover/cover-min.jpg",
+					"duration": "04:52"
+				},
+				{
+					"name": "Ennio Morricone vs Nach - Once upon a time in America (Poverty) vs Poesía difusa (El regreso)",
+					"artist": "DJ Kaiser",
+					"album": "Auténtico sabor a Funk",
+					"url": "musica/29.mp3",
+					"cover_art_url": "cover/cover-min.jpg",
+					"duration": "01:36"
+				},
+				{
+					"name": "The Dramatics vs Xhelazz - Door to your heart vs Horror fedra flick",
+					"artist": "DJ Kaiser",
+					"album": "Auténtico sabor a Funk",
+					"url": "musica/30.mp3",
+					"cover_art_url": "cover/cover-min.jpg",
+					"duration": "01:48"
+				},
+				{
+					"name": "The O'Jays vs Xhelazz vs Hate - She's only a woman vs Sólo son vidas vs Sólo son birras",
+					"artist": "DJ Kaiser",
+					"album": "Auténtico sabor a Funk",
+					"url": "musica/31.mp3",
+					"cover_art_url": "cover/cover-min.jpg",
+					"duration": "03:24"
+				},
+				{
+					"name": "The Paul Horn Quintet vs Acción Sánchez - Here's That Rainy Day vs Outro",
+					"artist": "DJ Kaiser",
+					"album": "Auténtico sabor a Funk",
+					"url": "musica/32.mp3",
+					"cover_art_url": "cover/cover-min.jpg",
+					"duration": "01:21"
+				},
+				{
+					"name": "Vangelis vs La Toska - Flamants Roses vs Código de Caballeros",
+					"artist": "DJ Kaiser",
+					"album": "Auténtico sabor a Funk",
+					"url": "musica/33.mp3",
+					"cover_art_url": "cover/cover-min.jpg",
+					"duration": "04:50"
+				},
+				{
+					"name": "Willie Hutch vs Juaninacka - A love that's worth having vs Hoy",
+					"artist": "DJ Kaiser",
+					"album": "Auténtico sabor a Funk",
+					"url": "musica/34.mp3",
+					"cover_art_url": "cover/cover-min.jpg",
+					"duration": "02:33"
+				},
+				{
+					"name": "Eddie Lockjaw Davies vs Violadores del verso - On green dolphin street vs Máximo exponente",
+					"artist": "DJ Kaiser",
+					"album": "Auténtico sabor a Funk",
+					"url": "musica/35.mp3",
+					"cover_art_url": "cover/cover-min.jpg",
+					"duration": "03:48"
+				},
+				{
+					"name": "Nino Ferrer vs Mario Maher y Kase.O - Mao Mao vs Bacalao",
+					"artist": "DJ Kaiser",
+					"album": "Auténtico sabor a Funk",
+					"url": "musica/36.mp3",
+					"cover_art_url": "cover/cover-min.jpg",
+					"duration": "02:19"
+				},
+				{
+					"name": "Alan Tew vs RdeRumba, Xhelazz y Hate - The detectives (long) vs Vino Viejo",
+					"artist": "DJ Kaiser",
+					"album": "Auténtico sabor a Funk",
+					"url": "musica/37.mp3",
+					"cover_art_url": "cover/cover-min.jpg",
+					"duration": "01:31"
+				},
+				{
+					"name": "Dr. Dre y Snoop Dogg vs Leon Haywood vs Duo Kie - Nuthin' but a 'G' thang vs I want'a do something freaky to you vs Homer Simpson",
+					"artist": "DJ Kaiser",
+					"album": "Auténtico sabor a Funk",
+					"url": "musica/38.mp3",
+					"cover_art_url": "cover/cover-min.jpg",
+					"duration": "04:13"
+				},
+				{
+					"name": "Isaac Hayes vs DJ Down y Kase.O - Hung up on my baby vs Exclusivo Trabajos Manuales",
+					"artist": "DJ Kaiser",
+					"album": "Auténtico sabor a Funk",
+					"url": "musica/39.mp3",
+					"cover_art_url": "cover/cover-min.jpg",
+					"duration": "01:41"
+				},
+				{
+					"name": "Joe Harnell vs Acción Sánchez y Toteking - Jamie's Theme vs Intro Creador series vol. 1",
+					"artist": "DJ Kaiser",
+					"album": "Auténtico sabor a Funk",
+					"url": "musica/40.mp3",
+					"cover_art_url": "cover/cover-min.jpg",
+					"duration": "01:25"
+				},
+				{
+					"name": "Aerolíneas federales vs Rack Eterno - No sé ligar vs Wapa",
+					"artist": "DJ Kaiser",
+					"album": "Auténtico sabor a Funk",
+					"url": "musica/41.mp3",
+					"cover_art_url": "cover/cover-min.jpg",
+					"duration": "02:05"
+				},
+				{
+					"name": "The Phenomenal Handclap Band vs RdeRumba, Xhelazz y Violadores - Baby vs Dale tiempo al Rumor Remix",
+					"artist": "DJ Kaiser",
+					"album": "Auténtico sabor a Funk",
+					"url": "musica/42.mp3",
+					"cover_art_url": "cover/cover-min.jpg",
+					"duration": "02:05"
+				}
+
+			];
+			
+		Amplitude.init({
+			"songs": array_canciones,
+			"autoplay": true,
+			"callbacks": {
+				'song_change': function(){
+					ColoresFuentes();
+				}
+		 }
+		});
+		RellenarListaConCanciones();
+		
+		function AddSong(indice_cancion,titulo_cancion,artista_cancion,duracion_cancion){
+			var add = '<div class="song amplitude-song-container amplitude-play-pause" amplitude-song-index="' + indice_cancion.toString() + '" onclick="ReproducirCancion(' + indice_cancion.toString() + ')">  <div class="song-now-playing-icon-container">	<div class="play-button-container">	</div>	<img class="now-playing" src="./img/now-playing.svg"/>  </div>  <div class="song-meta-data">	<span class="song-artist">' + artista_cancion + '</span>	<span class="song-title">' + titulo_cancion + '</span>  </div>  <!--<a href="" class="bandcamp-link" target="_blank">	<img class="bandcamp-grey" src="./img/bandcamp-grey.svg"/>	<img class="bandcamp-white" src="./img/bandcamp-white.svg"/>  </a>-->  <span class="song-duration">' + duracion_cancion + '</span></div>';
+			$("#amplitude-right").append(add);
+		}
+		
+		function ReproducirCancion(idx){
+			if (idx!==Amplitude.getActiveIndex()){
+				Amplitude.playSongAtIndex(idx);
+			}
+		}
+		
+		function RellenarListaConCanciones(){
+			var name = "";
+			var dur = "";
+			for (var i=0;i<array_canciones.length;i++){
+				name = array_canciones[i]["name"];
+				name = name.replace(/ vs /g, ' <strong style="color:#d91d1d;">&#9876;</strong> ')
+				dur = array_canciones[i]["duration"];
+				parts = name.split(" - ");
+				AddSong(i,parts[1],parts[0],dur);
+			}
+		}
+		
+		function ColoresFuentes(){
+		
+			$('.song').css('background-color', '#FFFFFF');
+			
+			$('.song').find('.play-button-container').css('display', 'none');
+			$('.song').find('img.bandcamp-grey').css('display', 'block');
+			$('.song').find('img.bandcamp-white').css('display', 'none');
+			$('.song').find('.song-meta-data .song-title').css('color', '#272726');
+			$('.song').find('.song-meta-data .song-artist').css('color', '#607D8B');
+			$('.song').find('.song-duration').css('color', '#607D8B');
+			
+			$('.song').each(function(){
+				if( $(this).hasClass('amplitude-active-song-container') ){
+					$(this).find('.song-meta-data .song-title').css('color', '#efefef');
+					$(this).find('.song-meta-data .song-artist').css('color', '#ffffff');
+					$(this).find('.song-duration').css('color', '#efefef');
+				}else{
+					$(this).find('.song-meta-data .song-title').css('color', '#272726');
+					$(this).find('.song-meta-data .song-artist').css('color', '#607D8B');
+					$(this).find('.song-duration').css('color', '#607D8B');
+				}
+			});
+		}
+	</script>
+</html>
